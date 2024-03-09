@@ -5,6 +5,8 @@ const cors = require('cors')
 const bodyparser = require('body-parser')
 const morgan= require('morgan')
 const path = require('path')
+const mongoose = require('mongoose')
+
 dotenv.config({
     path:'./config/index.env'
 })
@@ -15,9 +17,15 @@ app.use(bodyparser.json())
 
 app.use(express.static(path.join(__dirname,'uploads')))
 
-const connectDB = require('./config/db')
-connectDB()
 
+const connectDB = async() => {
+    const connection = await mongoose.connect('mongodb+srv://ahmedelhdad923:RrX9ChI362nzzplt@ProjectApp.6qexalc.mongodb.net/',{
+        useNewUrlParser:true,
+         useUnifiedTopology:true
+    })
+    console.log(connection.connection.host)
+}
+module.exports = connectDB
 app.use('/',require('./router/auth_user'))
 app.use('/',require('./router/category'))
 app.use('/api',require('./router/products'))
