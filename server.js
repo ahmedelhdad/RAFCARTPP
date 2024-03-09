@@ -31,7 +31,7 @@ app.use('/',require('./router/order'))
 
 
 
-const port = process.env.port
+const port = 3000
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
