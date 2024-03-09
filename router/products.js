@@ -49,7 +49,7 @@ router.get('/page/recomended', async (req, res) => {
 router.put('/updatap/product', async (req, res) => {
     // Founded Product 
     const product = await producds.findById(req.body._id)
-    // product.save()
+    product.save()
     product.update(req.body)
         .then((result) => res.json(result))
         .catch(() => console.log('err'))
