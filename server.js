@@ -15,8 +15,6 @@ app.use(bodyparser.json())
 
 app.use(express.static(path.join(__dirname,'uploads')))
 
-const connectDB = require('./config/db')
-connectDB()
 
 app.use('/',require('./router/auth_user'))
 app.use('/',require('./router/category'))
