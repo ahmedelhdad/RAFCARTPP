@@ -4,7 +4,8 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const bodyparser = require('body-parser')
 const morgan= require('morgan')
-const path = require('path')
+const mongoose = require('mongoose')
+
 dotenv.config({
     path:'./config/index.env'
 })
@@ -13,8 +14,13 @@ app.use(morgan('dev'))
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
 
-app.use(express.static(path.join(__dirname,'uploads')))
-const connectDB = require('./config/db')
+const connectDB = async() => {
+    const connection = await mongoose.connect(process.env.URL,{
+        useNewUrlParser:true,
+         useUnifiedTopology:true
+    })
+    console.log(connection.connection.host)
+}
 connectDB()
 
 app.use('/',require('./router/auth_user'))
@@ -30,7 +36,7 @@ app.use('/',require('./router/order'))
 
 
 
-const port = process.env.port
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
