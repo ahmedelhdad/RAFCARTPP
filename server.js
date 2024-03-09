@@ -25,7 +25,7 @@ const connectDB = async() => {
     })
     console.log(connection.connection.host)
 }
-module.exports = connectDB
+connectDB
 app.use('/',require('./router/auth_user'))
 app.use('/',require('./router/category'))
 app.use('/api',require('./router/products'))
