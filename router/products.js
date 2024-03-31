@@ -24,8 +24,6 @@ router.get('/products', (req, res) => {
 router.get('/product/:id', async (req, res) => {
     const { id } = req.params
     const Cate = await producds.findById(id)
-    Cate.view++;
-    await Cate.save()
     res.json(Cate)
 })
 
